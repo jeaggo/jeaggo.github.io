@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room: El Caso de los Datos Perdidos (Mejorado)</title>
+    <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 El Caso de los Datos Perdidos</h1>
+            <p>Investigación de Clasificación de Datos</p>
+        </div>
+
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-step active" data-section="1">Sección 1</div>
+            <div class="progress-step" data-section="2">Sección 2</div>
+            <div class="progress-step" data-section="3">Sección 3</div>
+            <div class="progress-step" data-section="4">Sección 4</div>
+            <div class="progress-step" data-section="5">Sección 5</div>
+        </div>
+
+        <!-- SECCIÓN 1: TIPOS DE DATOS -->
+        <div class="section active" id="section1">
+            <h2>📋 Sección 1: El Archivo del Sospechoso</h2>
+            <div class="story-text">
+                <p><strong>Expediente 001:</strong> Has sido asignado como investigador principal del caso de DataCorp. La empresa ha sufrido una grave crisis de datos donde información crítica está mezclada sin clasificar. Tu primera tarea: encontrar el expediente del sospechoso principal.</p>
+                <p>En la escena del crimen, encuentras varios tipos de documentos mezclados. Debes identificar qué tipo de dato corresponde a cada documento para organizar la evidencia correctamente.</p>
+            </div>
+
+            <div class="puzzle-container">
+                <h3>🔎 Acertijo: Clasifica los siguientes datos según su tipo</h3>
+                <p>Arrastra cada documento a su categoría correcta:</p>
+                
+                <div style="margin: 20px 0;">
+                    <div class="data-card" draggable="true" data-type="maestros">
+                        📄 Lista de todos los empleados de la empresa con su información personal única
+                    </div>
+                    <div class="data-card" draggable="true" data-type="transaccional">
+                        📊 Registro de cada venta realizada en el último mes
+                    </div>
+                    <div class="data-card" draggable="true" data-type="referencia">
+                        📍 Catálogo de códigos postales y nombres de países
+                    </div>
+                    <div class="data-card" draggable="true" data-type="metadata">
+                        🏷️ Información sobre cuándo fue creada la base de datos y quién la modificó
+                    </div>
+                    <div class="data-card" draggable="true" data-type="eventos">
+                        ⚡ Registro de acceso al sistema a las 14:35 hrs del usuario admin
+                    </div>
+                </div>
+
+                <h4>Categorías de Datos:</h4>
+                <div class="drag-zone" data-category="maestros">
+                    <strong>Datos Maestros:</strong> <span id="drop-maestros"></span>
+                </div>
+                <div class="drag-zone" data-category="transaccional">
+                    <strong>Datos Transaccionales:</strong> <span id="drop-transaccional"></span>
+                </div>
+                <div class="drag-zone" data-category="referencia">
+                    <strong>Datos de Referencia:</strong> <span id="drop-referencia"></span>
+                </div>
+                <div class="drag-zone" data-category="metadata">
+                    <strong>Metadatos:</strong> <span id="drop-metadata"></span>
+                </div>
+                <div class="drag-zone" data-category="eventos">
+                    <strong>Datos de Eventos:</strong> <span id="drop-eventos"></span>
+                </div>
+
+                <button onclick="checkSection1()">Verificar Clasificación</button>
+                <div class="feedback" id="feedback1"></div>
+            </div>
+
+            <div class="hint">
+                💡 <strong>Pista:</strong> Los datos maestros son la información clave de las entidades principales. Los transaccionales registran operaciones. Los de referencia son catálogos estándar. Los metadatos describen otros datos.
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: CLASIFICACIÓN POR CONTENIDO -->
+        <div class="section" id="section2">
+            <h2>🗂️ Sección 2: Los Dominios del Crimen</h2>
+            <div class="story-text">
+                <p><strong>Expediente 002:</strong> Excelente trabajo, investigador. Ahora que has clasificado los tipos de datos, necesitas organizar la evidencia por dominios de datos. El sospechoso ha dejado rastros en diferentes áreas de negocio.</p>
+                <p>Los datos están dispersos en múltiples dominios. Debes identificar a qué área temática pertenece cada pieza de evidencia para reconstruir el caso.</p>
+            </div>
+
+            <div class="puzzle-container">
+                <h3>🔎 Acertijo: Asigna cada dato a su dominio correcto</h3>
+                
+                <div style="margin: 20px 0;">
+                    <div class="data-card" onclick="selectCard(this, 2)" data-domain="clientes">
+                        Nombre, dirección y preferencias de compra de Juan Pérez
+                    </div>
+                    <div class="data-card" onclick="selectCard(this, 2)" data-domain="finanzas">
+                        Factura #45321 por $15,000 pagada mediante transferencia
+                    </div>
+                    <div class="data-card" onclick="selectCard(this, 2)" data-domain="productos">
+                        Especificaciones técnicas del modelo X-2000 y su precio de venta
+                    </div>
+                    <div class="data-card" onclick="selectCard(this, 2)" data-domain="empleados">
+                        Contrato laboral y puesto de María González en el departamento de TI
+                    </div>
+                    <div class="data-card" onclick="selectCard(this, 2)" data-domain="operaciones">
+                        Ruta de envío del pedido #78945 desde el almacén hasta el cliente
+                    </div>
+                </div>
+
+                <h4>Selecciona el dominio para cada dato:</h4>
+                <select id="domain-select" disabled>
+                    <option value="">-- Primero selecciona un dato arriba --</option>
+                    <option value="clientes">Dominio de Clientes</option>
+                    <option value="finanzas">Dominio de Finanzas</option>
+                    <option value="productos">Dominio de Productos</option>
+                    <option value="empleados">Dominio de Empleados</option>
+                    <option value="operaciones">Dominio de Operaciones</option>
+                </select>
+
+                <button onclick="assignDomain()">Asignar Dominio</button>
+                <!-- Se elimina el botón "Verificar Clasificación" ya que la verificación se hace en assignDomain -->
+                <div class="feedback" id="feedback2"></div>
+            </div>
+
+            <div class="hint">
+                💡 <strong>Pista:</strong> Los dominios representan áreas temáticas del negocio. Piensa en qué departamento o función empresarial usaría cada tipo de información.
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: CLASIFICACIÓN POR FORMATO -->
+        <div class="section" id="section3">
+            <h2>📁 Sección 3: Los Formatos Ocultos</h2>
+            <div class="story-text">
+                <p><strong>Expediente 003:</strong> La investigación avanza. Has descubierto que el sospechoso almacenó datos en diferentes formatos para ocultar la evidencia. Necesitas identificar el formato de cada archivo encontrado.</p>
+                <p>En la computadora del sospechoso hay archivos en múltiples formatos. Clasificarlos correctamente es crucial para acceder a la información.</p>
+            </div>
+
+            <div class="puzzle-container">
+                <h3>🔎 Acertijo: Identifica el formato correcto de cada archivo</h3>
+                
+                <div style="margin: 20px 0;">
+                    <div style="margin: 15px 0;">
+                        <p><strong>Archivo 1:</strong> Contiene filas y columnas de datos de ventas que se pueden filtrar y ordenar</p>
+                        <!-- Se cambia el ID para que coincida con la lógica de checkSection3 -->
+                        <input type="text" id="validation1" placeholder="Escribe el concepto de calidad (ej: Unicidad, Integridad Referencial, etc.)">
+                    </div>
+                    
+                    <div style="margin: 15px 0;">
+                        <p><strong>Archivo 2:</strong> Clave foránea en una tabla que debe existir como clave primaria en otra</p>
+                        <!-- Se cambia el ID para que coincida con la lógica de checkSection3 -->
+                        <input type="text" id="validation2" placeholder="Escribe el concepto de calidad">
+                    </div>
+                    
+                    <div style="margin: 15px 0;">
+                        <p><strong>Archivo 3:</strong> Un campo de fecha que siempre debe seguir el patrón AAAA-MM-DD</p>
+                        <!-- Se cambia el ID para que coincida con la lógica de checkSection3 -->
+                        <input type="text" id="validation3" placeholder="Escribe el concepto de calidad">
+                    </div>
+                    
+                    <!-- Se eliminan los acertijos 4 y 5 de la sección 3 original para simplificar y alinear con la lógica de checkSection3 que solo verifica 3 campos. Se ajustan los textos para que encajen con los conceptos de calidad de datos que la función checkSection3 espera (Unicidad, Integridad Referencial, Formato). -->
+                </div>
+
+                <button onclick="checkSection3()">Verificar Conceptos de Calidad</button>
+                <div class="feedback" id="feedback3"></div>
+            </div>
+
+            <div class="hint">
+                💡 <strong>Pista:</strong> Piensa en los pilares de la Calidad de Datos: **Unicidad** (no duplicados), **Integridad Referencial** (relaciones válidas) y **Formato** (estructura consistente).
+            </div>
+        </div>
+
+        <!-- SECCIÓN 4: CLASIFICACIÓN POR NIVEL DE PROTECCIÓN -->
+        <div class="section" id="section4">
+            <h2>🔒 Sección 4: La Matriz de Seguridad</h2>
+            <div class="story-text">
+                <p><strong>Expediente 004:</strong> Estás muy cerca de resolver el caso. Has descubierto que el sospechoso clasificó los datos según su nivel de sensibilidad. Necesitas reconstruir la matriz de seguridad para entender qué información fue comprometida.</p>
+                <p>Diferentes datos requieren diferentes niveles de protección. Clasifícalos correctamente para determinar el alcance del daño.</p>
+            </div>
+
+            <div class="puzzle-container">
+                <h3>🔎 Acertijo: Clasifica cada dato según su nivel de protección</h3>
+                
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo de Dato</th>
+                            <th>Nivel de Protección</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Número de tarjeta de crédito de un cliente</td>
+                            <td>
+                                <!-- Se cambia el ID para que coincida con la lógica de checkSection4 -->
+                                <select id="security3"> <!-- Crítico -->
+                                    <option value="">Seleccionar...</option>
+                                    <option value="publico">Público</option>
+                                    <option value="interno">Interno</option>
+                                    <option value="confidencial">Confidencial</option>
+                                    <option value="critico">Crítico/Restringido</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Catálogo de productos disponibles en el sitio web</td>
+                            <td>
+                                <!-- Se cambia el ID para que coincida con la lógica de checkSection4 -->
+                                <select id="security1"> <!-- Público -->
+                                    <option value="">Seleccionar...</option>
+                                    <option value="publico">Público</option>
+                                    <option value="interno">Interno</option>
+                                    <option value="confidencial">Confidencial</option>
+                                    <option value="critico">Crítico/Restringido</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Memorándum interno sobre cambios de política</td>
+                            <td>
+                                <!-- Se cambia el ID para que coincida con la lógica de checkSection4 -->
+                                <select id="security4"> <!-- Interno -->
+                                    <option value="">Seleccionar...</option>
+                                    <option value="publico">Público</option>
+                                    <option value="interno">Interno</option>
+                                    <option value="confidencial">Confidencial</option>
+                                    <option value="critico">Crítico/Restringido</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Estrategia financiera y planes de fusión de la empresa</td>
+                            <td>
+                                <!-- Se cambia el ID para que coincida con la lógica de checkSection4 -->
+                                <select id="security2"> <!-- Confidencial -->
+                                    <option value="">Seleccionar...</option>
+                                    <option value="publico">Público</option>
+                                    <option value="interno">Interno</option>
+                                    <option value="confidencial">Confidencial</option>
+                                    <option value="critico">Crítico/Restringido</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <!-- Se elimina el acertijo 5 de la sección 4 original para simplificar y alinear con la lógica de checkSection4 que solo verifica 4 campos. -->
+                    </tbody>
+                </table>
+
+                <button onclick="checkSection4()">Verificar Clasificación de Seguridad</button>
+                <div class="feedback" id="feedback4"></div>
+            </div>
+
+            <div class="hint">
+                💡 <strong>Pista:</strong> Público = disponible para todos; Interno = solo empleados; Confidencial = información sensible del negocio; Crítico = datos regulados o de máxima sensibilidad.
+            </div>
+        </div>
+
+        <!-- SECCIÓN 5: CLASIFICACIÓN POR ALMACENAMIENTO Y ACCESO -->
+        <div class="section" id="section5">
+            <h2>💾 Sección 5: El Mapa del Almacenamiento</h2>
+            <div class="story-text">
+                <p><strong>Expediente 005:</strong> ¡Última fase de la investigación! Has rastreado dónde y cómo se almacenan los datos. El sospechoso ha distribuido información en diferentes ubicaciones y métodos de acceso. Descubre el patrón para cerrar el caso.</p>
+                <p>La clave final está en entender cómo y dónde se accede a cada tipo de dato. Completa este último acertijo para resolver el misterio.</p>
+            </div>
+
+            <div class="puzzle-container">
+                <h3>🔎 Acertijo Final: Empareja cada escenario con su método de almacenamiento/acceso</h3>
+                
+                <div style="margin: 20px 0;">
+                    <p><strong>Escenario A:</strong> Datos que necesitan ser consultados instantáneamente por miles de usuarios simultáneos</p>
+                    <select id="storage1">
+                        <option value="">Seleccionar método...</option>
+                        <option value="memoria">En Memoria (RAM/Cache)</option>
+                        <option value="base">Base de Datos Transaccional</option>
+                        <option value="archivo">Sistema de Archivos</option>
+                        <option value="nube">Almacenamiento en la Nube</option>
+                        <option value="historico">Data Warehouse (Histórico)</option>
+                    </select>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <p><strong>Escenario B:</strong> Datos históricos de 10 años que se consultan ocasionalmente para análisis</p>
+                    <select id="storage2">
+                        <option value="">Seleccionar método...</option>
+                        <option value="memoria">En Memoria (RAM/Cache)</option>
+                        <option value="base">Base de Datos Transaccional</option>
+                        <option value="archivo">Sistema de Archivos</option>
+                        <option value="nube">Almacenamiento en la Nube</option>
+                        <option value="historico">Data Warehouse (Histórico)</option>
+                    </select>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <p><strong>Escenario C:</strong> Documentos PDF y contratos que necesitan ser accesibles pero no cambian frecuentemente</p>
+                    <select id="storage3">
+                        <option value="">Seleccionar método...</option>
+                        <option value="memoria">En Memoria (RAM/Cache)</option>
+                        <option value="base">Base de Datos Transaccional</option>
+                        <option value="archivo">Sistema de Archivos</option>
+                        <option value="nube">Almacenamiento en la Nube</option>
+                        <option value="historico">Data Warehouse (Histórico)</option>
+                    </select>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <p><strong>Escenario D:</strong> Información que debe estar disponible desde cualquier ubicación geográfica con respaldo automático</p>
+                    <select id="storage4">
+                        <option value="">Seleccionar método...</option>
+                        <option value="memoria">En Memoria (RAM/Cache)</option>
+                        <option value="base">Base de Datos Transaccional</option>
+                        <option value="archivo">Sistema de Archivos</option>
+                        <option value="nube">Almacenamiento en la Nube</option>
+                        <option value="historico">Data Warehouse (Histórico)</option>
+                    </select>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <p><strong>Escenario E:</strong> Registros de ventas del día que se están procesando activamente con actualizaciones constantes</p>
+                    <select id="storage5">
+                        <option value="">Seleccionar método...</option>
+                        <option value="memoria">En Memoria (RAM/Cache)</option>
+                        <option value="base">Base de Datos Transaccional</option>
+                        <option value="archivo">Sistema de Archivos</option>
+                        <option value="nube">Almacenamiento en la Nube</option>
+                        <option value="historico">Data Warehouse (Histórico)</option>
+                    </select>
+                </div>
+
+                <button onclick="checkSection5()">Resolver el Caso</button>
+                <div class="feedback" id="feedback5"></div>
+            </div>
+
+            <div class="hint">
+                💡 <strong>Pista:</strong> Considera la velocidad de acceso necesaria, la frecuencia de consulta, el tipo de contenido y la necesidad de acceso remoto o distribuido.
+            </div>
+        </div>
+        
+        <!-- Mensaje final de éxito (Mejora: se añade un mensaje final visible al resolver el caso) -->
+        <div class="section final-message" id="finalMessage" style="display: none;">
+            <h3>¡FELICIDADES! CASO RESUELTO</h3>
+            <p>Has demostrado ser un experto en clasificación y gestión de datos. La integridad de DataCorp ha sido restaurada gracias a tu habilidad para identificar, clasificar y proteger la información. ¡El sospechoso ha sido identificado y los datos están seguros!</p>
+            <p><strong>CLAVE FINAL: MAESTRO-CLIENTES-95-456</strong></p>
+        </div>
+    </div>
+
+    <!-- Enlace al archivo JavaScript externo -->
+    <script src="script.js"></script>
+</body>
+</html>
